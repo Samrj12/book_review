@@ -8,6 +8,6 @@ services:
       - ./pgdata:/var/lib/postgresql/data
       - ./db.sql:/docker-entrypoint-initdb.d/db.sql
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=1234
       - POSTGRE_DB=postgres

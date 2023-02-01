@@ -1,5 +1,4 @@
 package Security;
-
 import com.ben.reviews.User.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

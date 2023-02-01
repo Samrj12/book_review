@@ -1,36 +1,72 @@
-package com.ben.reviews;
+package com.ben.reviews.User;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.util.Collection;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import static jakarta.persistence.GenerationType.AUTO;
-import static jakarta.persistence.GenerationType.IDENTITY;
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "_user")
+public class User implements UserDetails {
 
-@Entity (name = "user")
+  @Id
+  @GeneratedValue
+  private Integer id;
+  private String firstname;
+  private String lastname;
+  private String email;
+  private String password;
 
-public class User {
-    @SequenceGenerator(name="user_id_swq",sequenceName = "user_id_seq",allocationSize = 1)
-    @GeneratedValue(strategy = IDENTITY, generator = "user_id_seq")
-    @Id
-    private Integer id;
-    private String name;
-    private String password;
+  @Enumerated(EnumType.STRING)
 
-    public User(){}
-    public User(Integer id, String name, String password){
-        this.id = id;
-        this.name = name;
-        this.password = password;
-    }
+  @Override
+  public String getPassword() {
+    return password;
+  }
 
-    public void setName(String usr){
-        this.name = usr;
-    }
+  @Override
+  public String getUsername() {
+    return email;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  @Override
+  public boolean isAccountNonExpired() {
+    return true;
+  }
 
-    public String getName() {
-        return this.name;
-    }
+  @Override
+  public boolean isAccountNonLocked() {
+    return true;
+  }
+
+  @Override
+  public boolean isCredentialsNonExpired() {
+    return true;
+  }
+
+  @Override
+  public boolean isEnabled() {
+    return true;
+  }
+
+@Override
+public Collection<? extends GrantedAuthority> getAuthorities() {
+    // TODO Auto-generated method stub
+    return null;
+}
 }

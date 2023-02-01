@@ -29,7 +29,7 @@ public class ReviewsApplication {
 
 	@PostMapping("/register")
 	public RegistrationConfirmation Register(@RequestBody User newUser) {
-		String name = newUser.getName();
+		String name = newUser.getUsername();
 		if (userRepository.existsByName(name)) {
 			return new RegistrationConfirmation(name, "Error: Username already taken.");
 		}
